@@ -256,11 +256,11 @@ describe "Mongoid::Autoinc" do
 
       describe "before create" do
 
-        let(:lottery_ticket) { LotteryTicket.new }
+        let(:lottery_ticket) { LotteryTicket.new(start: 10) }
 
         it "should call the autoincrementor with the options hash" do
           Mongoid::Autoinc::Incrementor.should_receive(:new).
-            with('LotteryTicket', :number, {step: 37, auto: true}).
+            with('LotteryTicket', :number, {step: 11, auto: true}).
             and_return(incrementor)
 
           lottery_ticket.save!

@@ -101,7 +101,7 @@ describe "Mongoid::Autoinc::Incrementor" do
 
     end
 
-    context "with a step value" do
+    context "with a step Integer value" do
 
       before { Ticket.delete_all }
 
@@ -109,6 +109,18 @@ describe "Mongoid::Autoinc::Incrementor" do
         (1..10).each do |i|
           Ticket.create.number.should == 2 * i
         end
+      end
+
+    end
+
+    context "with a step Proc value" do
+
+      before { LotteryTicket.delete_all }
+
+      it "should increment according to the step value" do
+        LotteryTicket.create(start: 10).number.should == 11
+        LotteryTicket.create(start: 30).number.should == 42
+        LotteryTicket.create.number.should == 43
       end
 
     end

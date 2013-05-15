@@ -74,8 +74,9 @@ class LotteryTicket
   include Mongoid::Document
   include Mongoid::Autoinc
 
+  field :start, type: Integer, default: 0
   field :number
 
-  increments :number, step: lambda { 35 + 2 }
+  increments :number, step: lambda { start + 1 }
 
 end
