@@ -43,6 +43,7 @@ module Mongoid
     end
 
     def increment!(field, options)
+      options = options.dup
       options[:scope] = evaluate_scope(options[:scope]) if options[:scope]
       options[:step] = evaluate_step(options[:step]) if options[:step]
       write_attribute(
